@@ -120,10 +120,7 @@ def parse_protocol(data):
     #     "parsed_data": parsed_data
     # }
 
-# 消息接收回调函数
-def on_message(client, userdata, msg):
-    dataJson = json.loads(msg.payload)
-    data = parse_encoded_string(dataJson['data'])
+def data_func(data):
     dataHead = data[0:2]
     if dataHead == 'bd':
         dataType = data[2:4]
@@ -170,6 +167,9 @@ def on_message(client, userdata, msg):
             case '32':
                 print("健康:")
                 str=data[:50]
+                new_str=data[54:]
+                if(len(new_str)>0):
+                    data_func(new_str)
                 data1=bytes.fromhex(str)
                 parse_protocol(data1)
             case 'c5':
@@ -178,6 +178,13 @@ def on_message(client, userdata, msg):
                 print("天气")
             case 'b5':
                 print('SOS')
+
+# 消息接收回调函数
+def on_message(client, userdata, msg):
+    dataJson = json.loads(msg.payload)
+    data = parse_encoded_string(dataJson['data'])
+    data_func(data)
+    
                 
     # print(msg.topic + " " + str(data))
 
