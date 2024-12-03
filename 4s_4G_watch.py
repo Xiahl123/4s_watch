@@ -11,7 +11,7 @@ def connectTcp():
   server_socket.bind((HOST, PORT))
   # 开始监听连接，参数是最大连接数
   server_socket.listen(5)
-  print(f"TCP服务器正在运行，监听 {host}:{port}...")
+  print(f"TCP服务器正在运行，监听 {HOST}:{PORT}...")
   while True:
     # 接受连接
     client_socket, addr = server_socket.accept()
@@ -23,7 +23,7 @@ def connectTcp():
         if not data:
             break  # 如果没有数据，退出循环
         print(f"接收到数据: {data.decode('utf-8')}")
-        client_socket.sendall(data)  # 回送相同的数据
+        # client_socket.sendall(data)  # 回送相同的数据
 
     client_socket.close()  # 关闭连接
     print(f"与 {addr} 的连接已关闭")
