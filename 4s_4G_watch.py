@@ -22,7 +22,7 @@ def connectTcp():
         data = client_socket.recv(1024)  # 接收数据
         if not data:
             break  # 如果没有数据，退出循环
-        print(f"接收到数据: {data.decode('utf-8')}")
+        print(f"接收到数据: {data}")
         # client_socket.sendall(data)  # 回送相同的数据
 
     client_socket.close()  # 关闭连接
